@@ -3,7 +3,14 @@ from django.shortcuts import render
 from django.views.generic import ListView, TemplateView
 
 #
-from rest_framework.generics import ListAPIView, CreateAPIView, RetrieveAPIView, DestroyAPIView
+from rest_framework.generics import (
+    ListAPIView,
+    CreateAPIView,
+    RetrieveAPIView,
+    DestroyAPIView,
+    UpdateAPIView,
+    RetrieveUpdateAPIView,
+)
 
 #
 from .models import Person
@@ -57,6 +64,18 @@ class PersonDetailView(RetrieveAPIView):
 
 
 class PersonDeleteView(DestroyAPIView):
+
+    serializer_class = PersonSerializer
+    queryset = Person.objects.all()
+
+
+class PersonUpdateView(UpdateAPIView):
+
+    serializer_class = PersonSerializer
+    queryset = Person.objects.all()
+
+
+class PersonRetriveUpdateView(RetrieveUpdateAPIView):
 
     serializer_class = PersonSerializer
     queryset = Person.objects.all()
