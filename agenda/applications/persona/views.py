@@ -13,8 +13,15 @@ from rest_framework.generics import (
 )
 
 #
-from .models import Person
-from .serializers import PersonSerializer
+from .models import Person, Reunion
+from .serializers import (
+    PersonSerializer,
+    PersonaSerializer,
+    ReunionSerializer,
+    ReunionSerializer2,
+    ReunionSerializerLink,
+    PersonPagination,
+    )
 
 
 class ListaPersonas(ListView):
@@ -32,7 +39,6 @@ class PersonListApiView(ListAPIView):
 
     def get_queryset(self):
         return Person.objects.all()
-
 
 
 class PersonListView(TemplateView):
@@ -79,3 +85,38 @@ class PersonRetriveUpdateView(RetrieveUpdateAPIView):
 
     serializer_class = PersonSerializer
     queryset = Person.objects.all()
+
+
+class PersonApiLista(ListAPIView):
+    """Vista para interactuar con serializadores"""
+
+    serializer_class = PersonSerializer
+
+    def get_queryset(self):
+        return Person.objects.all()
+
+
+class ReunionApiLista(ListAPIView):
+
+    serializer_class = ReunionSerializer
+
+    def get_queryset(self):
+        return Reunion.objects.all()
+
+
+class ReunionApiListaLink(ListAPIView):
+
+    serializer_class = ReunionSerializerLink
+
+    def get_queryset(self):
+        return Reunion.objects.all()
+
+
+class PersonPaginationList(ListAPIView):
+    """Vista personas con paginacion"""
+
+    serializer_class = PersonSerializer
+    pagination_class = PersonPagination
+
+    def get_queryset(self):
+        return Person.objects.all()

@@ -29,6 +29,7 @@ urlpatterns = [
     path(
         'api/persona/detail/<pk>',
         views.PersonDetailView.as_view(),
+        name='detalle'
     ),
     path(
         'api/persona/delete/<pk>',
@@ -41,5 +42,21 @@ urlpatterns = [
     path(
         'api/persona/modificar/<pk>',
         views.PersonRetriveUpdateView.as_view(),
+    ),
+    path(
+        'api/personas/',
+        views.PersonApiLista.as_view(),
+    ),
+    path(
+        'api/reuniones/',
+        views.ReunionApiLista.as_view(),
+    ),
+    path(
+        'api/reuniones-link/',
+        views.ReunionApiListaLink.as_view(),
+    ),
+    path(
+        'api/personas/paginacion',
+        views.PersonPaginationList.as_view(),
     ),
 ]
